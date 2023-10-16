@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check out
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: set up
         uses: actions/setup-go@v4
         with:
@@ -30,7 +30,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Go build cache
         uses: actions/cache@v2
         with:
@@ -46,7 +46,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: test
         working-directory: ./src
         run: go test ./... -v
@@ -55,7 +55,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
