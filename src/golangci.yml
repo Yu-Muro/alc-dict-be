@@ -1,0 +1,38 @@
+run:
+  timeout: 5m
+  skip-dirs-use-default: false
+  go: 'latest'
+
+linters:
+  enable:
+    - bodyclose
+    - containedctx
+    - cyclop
+    - dogsled
+    - dupl
+    - errname
+    - errorlint
+    - exportloopref
+    - forcetypeassert
+    - gci
+    - gocognit
+    - goconst
+    - gofmt
+    - gosec
+    - lll
+    - nilerr
+    - nilnil
+    - rowserrcheck
+    - sqlclosecheck
+    - tagliatelle
+    - unconvert
+    - whitespace
+
+linters-settings:
+  gci:
+    sections:
+      - standard
+      - default
+  lll:
+    tab-width: 0
+    line-length: 120
