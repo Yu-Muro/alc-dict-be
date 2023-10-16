@@ -30,8 +30,8 @@ func main() {
 
 	logrus.Println("listening on http://localhost:8888")
 	server := &http.Server{
-		Addr:    ":8888",
-		Handler: router,
+		Addr:              ":8888",
+		Handler:           router,
 		ReadHeaderTimeout: 180,
 	}
 	if err := server.ListenAndServe(); err != nil {
