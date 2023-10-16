@@ -1,7 +1,23 @@
 version: '3'
 
+env:
+  APP_NAME: alc-dict
+dotenv: ['.env']
+
 tasks:
+  build:
+    cmds:
+      - docker compose build --no-cache
+
   up:
     cmds:
       - docker compose up -d
     silent: true
+
+  stop:
+    cmds:
+      - docker compose stop
+
+  down:
+    cmds:
+      - docker compose down --rmi all --volumes --remove-orphans
