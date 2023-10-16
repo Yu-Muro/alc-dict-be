@@ -1,0 +1,35 @@
+version: "3"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: dev
+    volumes:
+      - ./src:/go/src
+    ports:
+      - "${APP_PORT:-8888}:8888"
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+    command: go run main.go
+
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - data-volume:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: "postgres"
+      TZ: "${DB_TZ}"
+
+volumes:
+  data-volume:

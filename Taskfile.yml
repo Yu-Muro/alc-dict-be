@@ -1,0 +1,30 @@
+version: '3'
+
+env:
+  APP_NAME: alc-dict
+dotenv: ['.env']
+
+tasks:
+  build:
+    cmds:
+      - docker compose build --no-cache
+
+  up:
+    cmds:
+      - docker compose up -d
+    silent: true
+
+  stop:
+    cmds:
+      - docker compose stop
+
+  down:
+    cmds:
+      - docker compose down --rmi all --volumes --remove-orphans
+  
+  lint:
+    cmds:
+      - docker compose run --rm  api go fmt ./...
+      - docker compose run --rm  api go vet ./...
+      - docker compose run --rm  api go mod tidy
+      - gci write --skip-generated -s standard -s default ./src
