@@ -13,7 +13,7 @@ services:
       - db
     env_file:
       - ./.env
-    tty: true
+    command: go run main.go
 
   db:
     image: postgres
