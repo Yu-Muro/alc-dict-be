@@ -29,7 +29,14 @@ func main() {
 	})
 
 	logrus.Println("listening on http://localhost:8888")
-	logrus.Println(http.ListenAndServe(":8888", router))
+	server := &http.Server{
+		Addr:    ":8888",
+		Handler: router,
+		ReadHeaderTimeout: 180,
+	}
+	if err := server.ListenAndServe(); err != nil {
+		logrus.Warning(err)
+	}
 }
 
 func indexHandler(w http.ResponseWriter, req bunrouter.Request) error {
