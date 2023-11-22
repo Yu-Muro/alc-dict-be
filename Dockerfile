@@ -1,16 +1,15 @@
-FROM golang:latest as dev
+FROM node:latest as dev
 
 CMD ["/bin/bash", "-b"]
-
-ENV GOPATH=/go
 
 RUN apt-get update && apt-get upgrade -y\
   && apt-get autoremove -y\
   && apt-get clean\
   && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /go/src
+WORKDIR /usr/app
 
-COPY ./src/go.mod /go/src/go.mod
-COPY ./src/go.sum /go/src/go.sum
-RUN go mod download
+COPY ./app/alc-dict .
+
+RUN npm install -g wrangler
+RUN npm install

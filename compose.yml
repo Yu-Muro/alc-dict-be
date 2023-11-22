@@ -6,14 +6,14 @@ services:
       dockerfile: ./Dockerfile
       target: dev
     volumes:
-      - ./src:/go/src
+      - ./app/alc-dict:/usr/app
     ports:
-      - "${APP_PORT:-8888}:8888"
+      - "${APP_PORT:-8787}:8787"
     depends_on:
       - db
     env_file:
       - ./.env
-    command: go run main.go
+    tty: true
 
   db:
     image: postgres

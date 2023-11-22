@@ -13,6 +13,11 @@ tasks:
     cmds:
       - docker compose up -d
     silent: true
+  
+  build.up:
+    cmds:
+      - docker compose up -d --build
+    silent: true
 
   stop:
     cmds:
