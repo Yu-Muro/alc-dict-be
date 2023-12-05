@@ -7,8 +7,10 @@ services:
       target: dev
     volumes:
       - ./app/alc-dict:/usr/app
+      - wrangler_config:/root/.config/wrangler
     ports:
-      - "${APP_PORT:-8787}:8787"
+      - "${APP_PORT:-8976}:8976"
+      - "8787:8787"
     depends_on:
       - db
     env_file:
@@ -33,3 +35,4 @@ services:
 
 volumes:
   data-volume:
+  wrangler_config:
