@@ -1,16 +1,22 @@
-FROM golang:latest as dev
+FROM node:20.10.0 as dev
 
 CMD ["/bin/bash", "-b"]
-
-ENV GOPATH=/go
 
 RUN apt-get update && apt-get upgrade -y\
   && apt-get autoremove -y\
   && apt-get clean\
-  && rm -rf /var/lib/apt/lists/*
+  && apt-get install -y --no-install-recommends python3 g++ build-essential\
+  && yarn config set python /usr/bin/python3
 
-WORKDIR /go/src
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends libsqlite3-dev
 
-COPY ./src/go.mod /go/src/go.mod
-COPY ./src/go.sum /go/src/go.sum
-RUN go mod download
+WORKDIR /usr/app
+
+COPY ./app .
+
+RUN npm install -g wrangler
+RUN npm install -g @go-task/cli
+RUN  npm install better-sqlite3
+RUN npm install
+RUN npm cache clean --force

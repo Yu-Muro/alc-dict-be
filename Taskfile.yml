@@ -13,6 +13,14 @@ tasks:
     cmds:
       - docker compose up -d
     silent: true
+  
+  build.up:
+    cmds:
+      - docker compose up -d --build
+    silent: true
+
+  seed.local:
+    cmd: docker compose exec api wrangler d1 execute alc-dict --file=./sql/schema.sql --local
 
   stop:
     cmds:
@@ -21,10 +29,3 @@ tasks:
   down:
     cmds:
       - docker compose down --rmi all --volumes --remove-orphans
-  
-  lint:
-    cmds:
-      - docker compose run --rm  api go fmt ./...
-      - docker compose run --rm  api go vet ./...
-      - docker compose run --rm  api go mod tidy
-      - gci write --skip-generated -s standard -s default ./src
