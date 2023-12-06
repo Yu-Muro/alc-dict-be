@@ -19,6 +19,9 @@ tasks:
       - docker compose up -d --build
     silent: true
 
+  seed.local:
+    cmd: docker compose exec api wrangler d1 execute alc-dict --file=./sql/schema.sql --local
+
   stop:
     cmds:
       - docker compose stop
