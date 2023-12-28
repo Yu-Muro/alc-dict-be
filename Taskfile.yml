@@ -15,10 +15,10 @@ tasks:
     cmd: docker compose up -d --build
 
   seed:
-    cmd: docker compose exec $CONTAINER_NAME wrangler d1 execute $DB_NAME --file=./sql/schema.sql
+    cmd: docker compose exec $CONTAINER_NAME wrangler d1 migrations apply $DB_NAME
 
   seed.local:
-    cmd: docker compose exec $CONTAINER_NAME wrangler d1 execute $DB_NAME --file=./sql/schema.sql --local
+    cmd: docker compose exec $CONTAINER_NAME wrangler d1 migrations apply $DB_NAME --local
 
   stop:
     cmd: docker compose stop
