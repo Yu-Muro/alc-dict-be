@@ -11,7 +11,7 @@ services:
     ports:
       - "8976:8976"
       - "8787:8787"
-    command: wrangler dev
+    command: wrangler dev --port 8976
 
 volumes:
   wrangler_config:
