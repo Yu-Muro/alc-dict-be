@@ -20,6 +20,9 @@ tasks:
   seed.local:
     cmd: docker compose exec $CONTAINER_NAME wrangler d1 migrations apply $DB_NAME --local
 
+  lint:
+    cmd: docker compose exec $CONTAINER_NAME npx prettier . --write
+
   stop:
     cmd: docker compose stop
 

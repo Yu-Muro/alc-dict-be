@@ -1,8 +1,8 @@
-import { Context } from "hono";
+import { Context } from 'hono';
 
 function healthCheck(c: Context) {
 	return c.json({
-		message: "Health check OK"
+		message: 'Health check OK',
 	});
 }
 
