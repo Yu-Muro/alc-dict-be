@@ -9,7 +9,15 @@
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20231121.0",
-		"typescript": "^5.0.4",
+		"@typescript-eslint/eslint-plugin": "^6.16.0",
+		"eslint": "^8.56.0",
+		"eslint-config-google": "^0.14.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-config-standard-with-typescript": "^43.0.0",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-plugin-n": "^16.5.0",
+		"eslint-plugin-promise": "^6.1.1",
+		"typescript": "^5.3.3",
 		"wrangler": "^3.0.0"
 	},
 	"dependencies": {
