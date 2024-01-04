@@ -1,8 +1,10 @@
 import { Hono } from 'hono';
-import { healthCheck } from '~/health';
+import { logger } from 'hono/logger'
+import { route } from '~/api/route';
 
 const app = new Hono();
-app.get('/api', (c) => c.text('Hello 🔥\n'));
-app.get('/api/healthcheck', (c) => healthCheck(c));
+
+app.use('*', logger())
+app.route('/api', route);
 
 export default app;
