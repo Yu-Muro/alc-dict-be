@@ -171,3 +171,8 @@ dist
 .dev.vars
 .wrangler/
 wrangler.toml
+
+# data migration files
+
+*.csv
+*_1_*.sql
