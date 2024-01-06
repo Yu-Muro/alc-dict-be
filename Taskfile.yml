@@ -21,16 +21,11 @@ tasks:
 
   seed.local:
     cmds:
-      - docker compose exec $CONTAINER_NAME wrangler d1 execute $DB_NAME --local --file=./sql/schema.sql
-      - docker compose exec $CONTAINER_NAME wrangler d1 migrations apply $DB_NAME --local
+      - docker compose down --rmi all --volumes --remove-orphans
 
   lint:
     cmds:
-      - docker compose exec $CONTAINER_NAME npx prettier . --write
-      - docker compose exec $CONTAINER_NAME npx eslint './src/**' --fix
-
-  stop:
-    cmd: docker compose stop
-
-  down:
-    cmd: docker compose down --rmi all --volumes --remove-orphans
+      - docker compose run --rm  api go fmt ./...
+      - docker compose run --rm  api go vet ./...
+      - docker compose run --rm  api go mod tidy
+      - gci write --skip-generated -s standard -s default ./src
