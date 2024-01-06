@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { healthCheck } from '~/api/health';
+import { healthCheck } from '~/controllers/health';
 
 const route = new Hono();
 

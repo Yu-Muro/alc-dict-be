@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { logger } from 'hono/logger'
-import { route } from '~/api/route';
+import { route } from '~/route';
 
 const app = new Hono();
 
