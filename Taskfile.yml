@@ -1,31 +1,31 @@
 version: '3'
 
 env:
-  APP_NAME: alc-dict
-dotenv: ['.env']
+  DB_NAME: alc-dict
+  CONTAINER_NAME: api
 
 tasks:
   build:
-    cmds:
-      - docker compose build --no-cache
+    cmd: docker compose build --no-cache
 
   up:
-    cmds:
-      - docker compose up -d
-    silent: true
-  
+    cmd: docker compose up -d
+
   build.up:
+    cmd: docker compose up -d --build
+
+  seed:
     cmds:
-      - docker compose up -d --build
-    silent: true
+      - docker compose exec $CONTAINER_NAME wrangler d1 execute $DB_NAME --file=./sql/schema.sql
+      - docker compose exec $CONTAINER_NAME wrangler d1 migrations apply $DB_NAME
 
   seed.local:
-    cmd: docker compose exec api wrangler d1 execute alc-dict --file=./sql/schema.sql --local
-
-  stop:
-    cmds:
-      - docker compose stop
-
-  down:
     cmds:
       - docker compose down --rmi all --volumes --remove-orphans
+
+  lint:
+    cmds:
+      - docker compose run --rm  api go fmt ./...
+      - docker compose run --rm  api go vet ./...
+      - docker compose run --rm  api go mod tidy
+      - gci write --skip-generated -s standard -s default ./src

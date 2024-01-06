@@ -1,24 +1,10 @@
-export interface Env {
-  // If you set another name in wrangler.toml as the value for 'binding',
-  // replace "DB" with the variable name you defined.
-  DB: D1Database;
-}
+import { Hono } from 'hono';
+import { logger } from 'hono/logger'
+import { route } from '~/route';
 
-export default {
-  async fetch(request: Request, env: Env) {
-    const { pathname } = new URL(request.url);
+const app = new Hono();
 
-    if (pathname === "/api") {
-      // If you did not use `DB` as your binding name, change it here
-      const { results } = await env.DB.prepare(
-        "SELECT * FROM Users"
-      )
-        .all();
-      return Response.json(results);
-    }
+app.use('*', logger())
+app.route('/api', route);
 
-    return new Response(
-      "Call /api/beverages to see everyone who works at Bs Beverages"
-    );
-  },
-};
+export default app;

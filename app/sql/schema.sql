@@ -1,10 +1,22 @@
-DROP TABLE IF EXISTS Users;
-CREATE TABLE Users (
+DROP TABLE IF EXISTS Whiskys;
+CREATE TABLE Whiskys (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT NOT NULL UNIQUE,
-  password TEXT NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  name TEXT NOT NULL,
+  volume INTEGER,
+  abv INTEGER,
+	kind TEXT,
+	area TEXT,
+  company TEXT,
+  description TEXT,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO Users (username, password) VALUES ("test_user_01", "password01");
-INSERT INTO Users (username, password) VALUES ("test_user_02", "password02");
+DROP TABLE IF EXISTS HealthCheck;
+CREATE TABLE HealthCheck (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+	connection TEXT NOT NULL,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+);
+INSERT INTO HealthCheck(connection) VALUES('ok');
