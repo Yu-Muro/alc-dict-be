@@ -8,11 +8,15 @@
 		"ecmaVersion": 13,
 		"sourceType": "module"
 	},
-	"plugins": [],
+	"plugins": [
+		"drizzle"
+	],
 	"parser": "@typescript-eslint/parser",
 	"rules": {
 		"quotes": ["error", "single"],
 		"indent": ["error", 4],
-		"max-len": "off"
+		"max-len": "off",
+		"drizzle/enforce-delete-with-where": "error",
+		"drizzle/enforce-update-with-where": "error"
 	}
 }
