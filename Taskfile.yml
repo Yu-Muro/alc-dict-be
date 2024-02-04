@@ -24,6 +24,9 @@ tasks:
       - docker compose exec $CONTAINER_NAME wrangler d1 execute $DB_NAME --local --file=./sql/schema.sql
       - docker compose exec $CONTAINER_NAME wrangler d1 migrations apply $DB_NAME --local
 
+  make.migration:
+    cmd: docker compose exec $CONTAINER_NAME npx drizzle-kit generate:sqlite
+
   lint:
     cmds:
       - docker compose exec $CONTAINER_NAME npx prettier . --write
